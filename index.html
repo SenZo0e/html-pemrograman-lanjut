@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelatihan HTML - Landing Page Sederhana</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            background-color: rgb(0, 0, 0);
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        h1 {
+            color: white;
+        }
+        h2 {
+            color: white;
+        }
+        p {
+            color: white;
+        }
+
+        .main-nav {
+            background-color: rgba(26, 24, 24, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.493);
+            backdrop-filter: blur(10px);
+            padding: 5px 20px;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 95%;
+            max-width: 1200px;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            flex-grow: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 25px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: auto; /* Pindahkan ke sebelah kanan */
+            order: 2; /* Pastikan di urutan terakhir */
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .main-nav {
+                top: 0;
+                border-radius: 0;
+                width: 100%;
+                border-left: none;
+                border-right: none;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 50px;
+                left: 0;
+                right: 0;
+                background-color: rgba(26, 24, 24, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 5px 0;
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Desktop Optimization */
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex !important;
+            }
+        }
+
+        #about {
+            padding: 80px;
+            text-align: center;
+            background-color: #000000; /* opsional untuk tampilan lebih terang */
+            }
+
+        #about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #ffffff;
+        }
+
+        .about-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            border: 1px solid #ffffff;
+            background: rgb(5, 5, 5);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            max-width: 250px;
+            flex: 1 1 220px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-box h3 {
+            font-size: 20px;
+            padding-bottom: 6%;
+            margin-bottom: 1px;
+            color: rgb(131, 74, 223);
+        }
+
+        .feature-box p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        #product {
+            position: relative;
+            background: linear-gradient(to bottom, #beb4ec, #4718b6, #000000 45%);
+            padding: 500px 20px 80px;
+            text-align: center;
+            border-radius: 40px 40px 0 0;
+            color: white;
+            overflow: hidden;
+        }
+
+        .product-label{
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 22px;
+            font-weight: 500;
+            margin: 0;
+            color: rgba(233, 234, 241, 0.664);
+        }
+
+        .product-label1{
+            position: absolute;
+            top: 14%;
+            left: 10%;
+            font-size: clamp(20px, 5vw, 40px);
+            font-weight: 500;
+            margin: 0;
+            color: rgb(255, 255, 255);
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 70px;
+            height: 100%;
+
+        }
+
+        .product-box {
+            background-color: #ffffff;
+            color: #5a45b4;
+            padding: 80px;
+            width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgb(0, 0, 0);
+            transition: transform 0.3s ease;
+        }
+        .service-hover {
+            transition: transform 0.3s ease;
+            box-shadow: 0 0px 0px rgb(0, 0, 0);
+        }
+        .service-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-box:hover {
+            transform: translateY(-5px);
+        }
+        .resource-hover {
+            transition: transform 0.3s ease;
+            box-shadow: 0 0px 0px rgb(0, 0, 0);
+        }
+        .resource-hover:hover {
+            transform: translateY(-5px);
+        }
+        .testimoni-hover {
+            transition: transform 0.3s ease;
+            box-shadow: 0 0px 0px rgb(0, 0, 0);
+        }
+        .testimoni-hover:hover {
+            transform: translateY(-5px);
+        }
+        .button-hover {
+            transition: transform 0.3s ease;
+            box-shadow: 0 0px 0px rgb(0, 0, 0);
+        }
+        .button-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-box h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .product-box p {
+            font-size: 15px;
+            color: #000000;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(184, 15, 15, 0.918);
+        }
+        #contact div[style*="background: rgba(255,255,255,0.05)"]:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08) !important;
+        }
+        
+        #contact a:hover {
+            opacity: 0.8;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#product">Product</a>
+            <a href="#services">Services</a>
+            <a href="#resource">Resources</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="menu-toggle">☰</button>
+    </nav>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            
+            // Toggle aria-expanded attribute
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+    
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.main-nav')) {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
+            }
+        });
+    
+        // Close menu after clicking a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section id="home" style="text-align: center; padding: 270px 20px; background: linear-gradient(to bottom, #000000 35%, #4718b6, #beb4ec); border-radius: 0px 0px 40px 40px;">
+        <h1 style="font-size: 50px; line-height: 1.2;">Hey! Let's get started! </h1>
+        <h2 style="font-size: 30px; line-height: 1.2;">Permulaan yang bagus untuk belajar HTML & CSS dengan kami</h2>
+        <br>
+        <p style="font-size: 17px; line-height: 1.5;">Melatih tata ruang dari UI/UX dengan penjelasan yang mudah dipahami</p>
+        <p style="font-size: 17px; line-height: 1.5;">Tim kami expert di bidangnya, menawarkan pengalaman project nyata di industri</p>
+        <div class="button-hover">
+            <button style="background: linear-gradient(45deg, #b963ff, #4a47a3); color: rgb(255, 255, 255); border: none; padding: 15px 40px; margin-top: 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">Mulai Belajar →</button>
+        </div>
+    </section>
+    <!-- Tentang -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Kami adalah penyedia pelatihan pemrograman web untuk pemula yang ingin memulai karir di bidang teknologi.</p>
+      
+        <div class="about-features">
+          <div class="feature-box">
+            <h3>Mudah Dipahami</h3>
+            <p>Materi disampaikan dengan bahasa yang sederhana</p>
+          </div>
+          <div class="feature-box">
+            <h3>Praktik Langsung</h3>
+            <p>Belajar sambil langsung mempraktikkan kode</p>
+          </div>
+          <div class="feature-box">
+            <h3>Gratis</h3>
+            <p>Tidak ada biaya untuk pelatihan dasar</p>
+          </div>
+        </div>
+      </section>
+      
+
+
+    <!-- Produk -->
+    <section id="product">
+        <p class="product-label">Product</p>
+        <h2 class="product-label1">Quality is greater than Quantity, Collaborate with Gravity Falls</h2>
+        <div class="product-container">
+          <div class="product-box">
+            <h3>HTML Dasar</h3>
+            <p>HTML adalah bahasa markup yang memungkinkan pengembang untuk menciptakan dan menata elemen-elemen dalam sebuah halaman web</p>
+          </div>
+          <div class="product-box">
+            <h3>Form HTML</h3>
+            <p>Form HTML adalah bahasa markup yang memungkinkan pengembang untuk menciptakan dan menata elemen-elemen dalam sebuah halaman web</p>
+          </div>
+          <div class="product-box">
+            <h3>Tabel HTML</h3>
+            <p>Tabel HTML adalah elemen yang digunakan untuk menampilkan data dalam bentuk baris dan kolom di halaman web</p>
+          </div>
+        </div>
+    </section>
+      
+
+    <!-- Layanan -->
+    <section id="services" style="background-color: #1a1a1a; background: linear-gradient(to bottom, #beb4ec, #4718b6, #000000 45%); padding: 100px 20px; text-align: center; border-radius: 40px 40px 0px 0px; color: white; display: relative;">
+        <h2 style="font-size: 2.5em; margin-bottom: 50px; text-shadow: 0 0 10px rgba(255,255,255,0.3);">What Team We Have?</h2>
+        <h2 style="font-weight: 500;">We Create Awesome Website with Secure Data Privacy</h2>
+        <p>Understanding the mechanism of the website, making you relize that we need that's all stuff</p>
+        <div class="service-container">   
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin: 0 auto;">
+            <!-- Frontend Path -->
+                <div class="service-hover">
+                    <div style="background: #312b2b34; backdrop-filter: blur(8px); margin: 10px; padding: 25px; width: 280px; border-radius: 15px; backdrop-filter: blur(5px); transition: transform 0.3s ease; border: 1px rgb(97, 47, 190) solid;">
+                        <div style="background: #ffffff; width: 50px; height: 50px; border-radius: 12px; margin: 50px auto 30px; border: 1px blue solid; display: grid; place-items: center; font-size: 2em;">🖥️</div>
+                        <h3 style="color: #ffffff; margin-bottom: 15px;">Frontend Development</h3>
+                        <p>Front-End Developer adalah bagian dari pengembangan website yang bertugas untuk menentukan dan membuat tampilan menarik pada website</p>
+                    </div>
+                </div>
+    
+            <!-- Backend Path -->
+                <div class="service-hover">
+                    <div style="background: #312b2b34; backdrop-filter: blur(8px); margin: 10px; padding: 25px; width: 280px; border-radius: 15px; backdrop-filter: blur(5px); transition: transform 0.3s ease; border: 1px rgb(97, 47, 190) solid;">
+                        <div style="background: #ffffff; width: 50px; height: 50px; border-radius: 12px; margin: 50px auto 30px; border: 1px blue solid; display: grid; place-items: center; font-size: 1.8em;">⚙️</div>
+                        <h3 style="color: #ffffff; margin-bottom: 15px;">Backend Development</h3>
+                        <p>Back-End Developer adalah individu yang bertanggung jawab mengelola bagian belakang layar dari sebuah aplikasi atau situs web</p>
+                    </div>
+                </div>
+    
+            <!-- Database -->
+                <div class="service-hover">
+                    <div style="background: #312b2b34; backdrop-filter: blur(8px); margin: 10px; padding: 25px; width: 280px; border-radius: 15px; backdrop-filter: blur(5px); transition: transform 0.3s ease; border: 1px rgb(97, 47, 190) solid;">
+                        <div style="background: #ffffff; width: 50px; height: 50px; border-radius: 12px; margin: 50px auto 50px; border: 1px blue solid; display: grid; place-items: center; font-size: 1.8em;">🗃️</div>
+                        <h3 style="color: #ffffff; margin-bottom: 15px;">Database Management</h3>
+                        <p>Database Management adalah proses pengelolaan data yang tersimpan dalam sistem database untuk memastikan integritas, keamanan, dan ketersediaan data</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-hover">
+            <button style="margin-top: 50px; padding: 15px 40px; background: linear-gradient(45deg, #b963ff, #4a47a3);; border: none; border-radius: 8px; color: rgb(255, 255, 255); font-size: 1.1em; cursor: pointer; transition: all 0.3s ease;">
+                View All Courses →
+            </button>
+        </div>
+    </section>
+
+
+    <!-- Pengembangan -->
+    <section id="resource" style="background-color: #1a1a1a; 
+            background: linear-gradient(to bottom, #beb4ec, #4718b6, #000000 45%); 
+            padding: 100px 20px; 
+            text-align: center; 
+            border-radius: 40px 40px 0px 0px; 
+            color: white;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.3);">
+        <h2 style="font-size: 2.5em; margin-bottom: 50px; text-shadow: 0 0 15px rgba(255,255,255,0.2);">
+            Developer Resources
+        </h2>
+        
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <!-- Frontend Resources -->
+            <div class="resource-hover">
+                <div style="background: rgba(255,255,255,0.05); 
+                        padding: 25px; 
+                        width: 280px; 
+                        border-radius: 15px; 
+                        backdrop-filter: blur(8px);
+                        border: 1px solid rgb(97, 47, 190);
+                        transition: transform 0.3s ease;">
+                    <div style="background: #ffffff; 
+                            width: 50px; 
+                            height: 50px; 
+                            border-radius: 12px;
+                            margin: 0 auto 20px;
+                            display: grid;
+                            place-items: center;
+                            font-size: 1.5em;">
+                        🔬
+                    </div>
+                    <h3 style="color: #ffffff; margin-bottom: 15px;">Professor's Research</h3>
+                    <ul style="text-align: left; list-style: none; padding: 0; line-height: 1.8;">
+                        <li>📁 React Component Library</li>
+                        <li>🎨 CSS Framework Templates</li>
+                        <li>📱 Responsive Design Kit</li>
+                        <li>⚡ Optimization Guide</li>
+                        <li>🔌 API Integration Examples</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Backend Resources -->
+            <div class="resource-hover">
+                <div style="background: rgba(255,255,255,0.05); 
+                        padding: 25px; 
+                        width: 280px; 
+                        border-radius: 15px; 
+                        backdrop-filter: blur(8px);
+                        border: 1px solid rgb(97, 47, 190);
+                        transition: transform 0.3s ease;">
+                    <div style="background: #ffffff; 
+                            width: 50px; 
+                            height: 50px; 
+                            border-radius: 12px;
+                            margin: 0 auto 20px;
+                            display: grid;
+                            place-items: center;
+                            font-size: 1.5em;">
+                        📚
+                    </div>
+                    <h3 style="color: #ffffff; margin-bottom: 15px;">Material Book</h3>
+                    <ul style="text-align: left; list-style: none; padding: 0; line-height: 1.8;">
+                        <li>📦 REST API Boilerplate</li>
+                        <li>🔑 Authentication Templates</li>
+                        <li>🗃️ Database Schema Samples</li>
+                        <li>⚙️ Server Configuration Guides</li>
+                        <li>📊 Query Optimization Handbook</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Expert Experience -->
+            <div class="resource-hover">
+                <div style="background: rgba(255,255,255,0.05); 
+                        padding: 25px; 
+                        width: 280px; 
+                        border-radius: 15px; 
+                        backdrop-filter: blur(8px);
+                        border: 1px solid rgb(97, 47, 190);
+                        transition: transform 0.3s ease;">
+                    <div style="background: #ffffff; 
+                            width: 50px; 
+                            height: 50px; 
+                            border-radius: 12px;
+                            margin: 0 auto 20px;
+                            display: grid;
+                            place-items: center;
+                            font-size: 1.5em;">
+                        🚀
+                    </div>
+                    <h3 style="color: #ffffff; margin-bottom: 15px;">Expert Experience</h3>
+                    <ul style="text-align: left; list-style: none; padding: 0; line-height: 1.8;">
+                        <li>🐳 Docker Configuration Files</li>
+                        <li>☁️ Cloud Deployment Scripts</li>
+                        <li>📈 Monitoring Setup Guides</li>
+                        <li>🔗 CI/CD Pipeline Examples</li>
+                        <li>🔒 Security Best Practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px;">
+            <div class="button-hover">
+                <button style="padding: 15px 40px;
+                        background: linear-gradient(45deg, #b963ff, #4a47a3);
+                        border: none;
+                        border-radius: 8px;
+                        color: white;
+                        font-size: 1.1em;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(108,99,255,0.3);">
+                    Access All Resources →
+                </button>
+            </div>
+        </div>
+    </section>
+
+        <!-- Testimoni -->
+    <section style="background-color: #0a0a23; 
+        background: linear-gradient(to bottom, #beb4ec, #4718b6, #000000 45%); 
+        padding: 120px 20px; 
+        text-align: center; 
+        border-radius: 40px 40px 0 0;
+        color: white;
+        box-shadow: 0 -20px 50px rgba(0,0,0,0.3);">
+    <h2 style="font-size: 2em; 
+        margin-bottom: 60px; 
+        text-shadow: 0 0 20px rgba(108,99,255,0.5);
+        position: relative;
+        display: inline-block;">
+    <span style="position: absolute; 
+            left: -60px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            font-size: 1.5em;"></span>
+    Why Trust Us? <br>
+    With Us, secure your data privacy and get the best experience
+    <span style="position: absolute; 
+            right: -60px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            font-size: 1.5em;"></span>
+    </h2>
+
+    <div style="display: flex; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 40px; 
+        max-width: 1300px; 
+        margin: 0 auto;">
+    <!-- Testimoni 1 -->
+    <div class="testimoni-hover">
+        <div style="background: rgba(255,255,255,0.05); 
+                padding: 30px; 
+                width: 350px; 
+                border-radius: 20px; 
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(108,99,255,0.3);
+                transition: all 0.3s ease;
+                position: relative;">
+            <div style="width: 60px;
+                    height: 60px;
+                    background: #6c63ff;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: -30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    place-items: center;
+                    font-size: 1.8em;"></div>
+            <p style="font-size: 1.1em; 
+                    line-height: 1.6; 
+                    margin: 30px 0 20px;
+                    font-style: italic;">
+                "Disini saya diajari menggunakan Lorem Ipsum dengan baik dan benar."
+            </p>
+            <h3 style="color: #6c63ff; margin: 0;">SenZoe</h3>
+            <p style="margin: 5px 0; font-size: 0.9em;">Junior Frontend Developer @Targon</p>
+            <div style="display: flex; 
+                    justify-content: center; 
+                    gap: 10px; 
+                    margin-top: 15px;">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+    </div>
+    <!-- Testimoni 2 -->
+    <div class="testimoni-hover">
+        <div style="background: rgba(255,255,255,0.05); 
+                padding: 30px; 
+                width: 350px; 
+                border-radius: 20px; 
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(108,99,255,0.3);
+                transition: all 0.3s ease;
+                position: relative;">
+            <div style="width: 60px;
+                    height: 60px;
+                    background: #6c63ff;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: -30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    place-items: center;
+                    font-size: 1.8em;"></div>
+            <p style="font-size: 1.1em; 
+                    line-height: 1.6; 
+                    margin: 30px 0 20px;
+                    font-style: italic;">
+                "Saya mempelajari banyak kosakata bahasa latin dari Lorem Ipsum."
+            </p>
+            <h3 style="color: #6c63ff; margin: 0;">Lospolos Hermanos</h3>
+            <p style="margin: 5px 0; font-size: 0.9em;">UX Engineer @DigitalYadigital</p>
+            <div style="display: flex; 
+                    justify-content: center; 
+                    gap: 10px; 
+                    margin-top: 15px;">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+    </div>
+    <!-- Testimoni 3 -->
+    <div class="testimoni-hover">
+        <div style="background: rgba(255,255,255,0.05); 
+                padding: 30px; 
+                width: 350px; 
+                border-radius: 20px; 
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(108,99,255,0.3);
+                transition: all 0.3s ease;
+                position: relative;">
+            <div style="width: 60px;
+                    height: 60px;
+                    background: #6c63ff;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: -30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    place-items: center;
+                    font-size: 1.8em;"></div>
+            <p style="font-size: 1.1em; 
+                    line-height: 1.6; 
+                    margin: 30px 0 20px;
+                    font-style: italic;">
+                "Omagad POCO"
+            </p>
+            <h3 style="color: #6c63ff; margin: 0;">Pengguna POCO X3 PRO</h3>
+            <p style="margin: 5px 0; font-size: 0.9em;">Senior DevOps Engineer @ScPocoTerdekat</p>
+            <div style="display: flex; 
+                    justify-content: center; 
+                    gap: 10px; 
+                    margin-top: 15px;">
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="button-hover">
+        <button style="margin-top: 60px;
+            padding: 16px 45px;
+            background: linear-gradient(45deg, #b963ff, #4a47a3);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(108,99,255,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;">
+        <span>Lihat Semua Testimoni</span>
+        <span style="font-size: 1.2em;">→</span>
+        </button>
+    </div>
+    </section>
+
+
+    <!-- Kontak -->
+    <section id="contact" style="background: linear-gradient(to bottom, #000000 35%, #4718b6, #beb4ec); color: white; padding: 200px 20px; text-align: center; border-radius: 0px 0px 40px 40px; border-top: 1px #876c9c solid;">
+        <h2 style="font-weight: 500; font-size: 40px;">Enhance customer experience and maximize revenue with your payments.</h2>
+        <p>Gunakan SenZoe's, Pengembang website yang keren dan keamanan data terjaga</p>
+        <div class="button-hover">
+            <button style="margin-top: 60px;
+                padding: 16px 45px;
+                background: linear-gradient(45deg, #b963ff, #4a47a3);
+                border: none;
+                border-radius: 12px;
+                color: white;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 20px rgba(108,99,255,0.3);
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;">
+            <span>Coba Sekarang Juga!</span>
+            <span style="font-size: 1.2em;">→</span>
+            </button>
+        </div>     
+    </section>
+
+        <!-- Kontak -->
+        <section id="contact" style="
+        background-color: #000000;
+        color: #ffffff;
+        padding: 100px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;">
+        
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="
+                font-size: 2.8rem;
+                margin-bottom: 50px;
+                font-weight: 600;
+                letter-spacing: -0.5px;
+                position: relative;
+                display: inline-block;
+                --gradient: linear-gradient(45deg, #b963ff, #4a47a3);
+                background-image: var(--gradient);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;">
+                Need More Information?
+            </h2>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                max-width: 800px;
+                margin: 0 auto;">
+                
+                <!-- Email Card -->
+                <div style="
+                    background: rgba(255,255,255,0.05);
+                    backdrop-filter: blur(10px);
+                    border-radius: 16px;
+                    padding: 30px;
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        font-size: 100px;
+                        width: 120px;
+                        height: 100px;
+                        background: rgba(0, 0, 0, 0);
+                        border-radius: 12px;
+                        margin: 0 auto 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;">
+                        ✉️
+                    </div>
+                    <h3 style="
+                        font-size: 1.4rem;
+                        margin-bottom: 15px;">
+                        Email
+                    </h3>
+                    <a href="mailto:info@pelatihanhtml.com" 
+                    style="
+                            color: #6c63ff;
+                            text-decoration: none;
+                            font-weight: 500;
+                            transition: opacity 0.3s ease;">
+                        info@pelatihanhtml.com
+                    </a>
+                </div>
+
+                <!-- Phone Card -->
+                <div style="
+                    background: rgba(255,255,255,0.05);
+                    backdrop-filter: blur(10px);
+                    border-radius: 16px;
+                    padding: 30px;
+                    transition: transform 0.3s ease;">
+                    <div style="
+                        font-size: 100px;
+                        width: 120px;
+                        height: 100px;
+                        background: rgba(107, 99, 255, 0);
+                        border-radius: 12px;
+                        margin: 0 auto 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;">
+                        ☎️
+                    </div>
+                    <h3 style="
+                        font-size: 1.4rem;
+                        margin-bottom: 15px;">
+                        Phone
+                    </h3>
+                    <p style="
+                        color: #6c63ff;
+                        font-weight: 500;
+                        margin: 0;">
+                        (021) 123-4567
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div style="
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(rgba(108,99,255,0.15), transparent 70%);
+            pointer-events: none;">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #0f0f0f; color: white; text-align: center; padding: 20px;">
+        <p>&copy; 2025 Pelatihan HTML Dasar. Semua hak dilindungi.</p>
+    </footer>
+</body>
+</html>
